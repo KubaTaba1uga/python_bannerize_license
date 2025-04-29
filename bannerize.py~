@@ -1,5 +1,4 @@
 import os
-import argparse
 
 # Banner to inject
 BANNER = """/*
@@ -28,15 +27,9 @@ def process_directory(root_dir):
             if any(filename.endswith(ext) for ext in EXTENSIONS):
                 inject_banner(os.path.join(dirpath, filename))
 
-def main():
-    parser = argparse.ArgumentParser(description="Inject a banner into C source and header files.")
-    parser.add_argument('directory', type=str, help="Directory to process")
-    args = parser.parse_args()
-
-    if os.path.isdir(args.directory):
-        process_directory(args.directory)
+if __name__ == "__main__":
+    directory = input("Enter the directory to process: ").strip()
+    if os.path.isdir(directory):
+        process_directory(directory)
     else:
         print("Invalid directory.")
-
-if __name__ == "__main__":
-    main()
